@@ -1,11 +1,11 @@
 ---
-name: git-development-standard
+name: git-development-standard-standard-to-message
 description: Enforce the project's Git workflow for branch naming, file staging, commits, pushes, merges, rebases, and pull requests. Use when the user asks to inspect Git changes, prepare or stage files, create or manage branches, generate commit or PR text, commit, push, merge, rebase, or open a pull request.
 ---
 
 # Git Development Standard
 
-Apply this workflow to Git-related tasks in every repository. This Skill only inspects changes and generates the final Commit Message for the user. It does not execute Git state-changing commands.
+Apply this workflow to Git-related tasks in every repository. This Skill only inspects changes and generates the final Commit Message plus a Git command for the user. It does not execute Git state-changing commands.
 
 ## Operation safety
 
@@ -18,7 +18,7 @@ Classify the requested operation before acting:
 
 ## Required pre-output confirmation
 
-Before generating the final Commit Message, inspect the relevant diff and ask all five questions:
+Before generating the final Commit Message and Git command, inspect the relevant diff and ask all five questions:
 
 1. **Change Type**: Is this a new feature, bug fix, refactor, performance optimization, or other change?
 2. **Change Scope**: Which module or business area does the change affect?
@@ -32,12 +32,13 @@ After confirmation, perform these checks immediately before generating the outpu
 
 1. Confirm the current branch is not `main`.
 2. Review both `git diff` and `git diff --cached`.
-3. Review the changed file list and, if a staging area already exists, confirm the staged file list contains only the intended files.
-4. Run or verify the relevant tests and record the result.
-5. Check for credentials, tokens, private keys, local environment files, generated secrets, or other sensitive data.
-6. If the staged content differs materially from the confirmed description, stop and ask again.
+3. Review the changed file list and identify the exact files belonging to this commit.
+4. If unrelated files are already staged, stop and ask the user to resolve the staging scope before generating a command.
+5. Run or verify the relevant tests and record the result.
+6. Check for credentials, tokens, private keys, local environment files, generated secrets, or other sensitive data.
+7. If the staged content differs materially from the confirmed description, stop and ask again.
 
-Only then generate the final Commit Message. Do not execute `git add`, `git commit`, `git push`, `git merge`, or `git rebase`.
+Only then generate the final Commit Message and Git command. Do not execute `git add`, `git commit`, `git push`, `git merge`, or `git rebase`.
 
 ## Branch rules
 
@@ -80,13 +81,22 @@ Valid commit types:
 
 Keep the description clear, concise, and accurate. One commit should preferably represent one logical change.
 
-Do not provide a branch name, PR title, explanation, code block, or Git command in the final output unless the user explicitly asks for it. After the five questions have been answered and the user confirms generation, output only one line in this format:
+After the five questions have been answered and the user confirms generation, output exactly these two items and nothing else:
+
+```text
+提交信息: <type>(<scope>): <中文描述>
+命令  : git add -- <本次修改文件> && git commit -m "<type>(<scope>): <中文描述>"
+```
+
+The `Command` must be the complete, copyable command for the user to execute: stage the exact files belonging to this commit with `git add --`, then commit with `git commit -m`. Replace the file placeholders with the actual changed file paths. Quote paths containing spaces. Use the exact generated Commit Message in the command. Do not use `git add .` or `git add -A`. Do not execute the command. Do not output branch names, PR titles, explanations, test summaries, or other Git commands unless the user explicitly asks for them.
+
+The Commit Message itself must follow this format:
 
 ```text
 <type>(<scope>): <中文描述>
 ```
 
-This Skill never executes `git push`, `git merge`, or `git rebase`. The user is responsible for applying the generated Commit Message and performing any later Git operation.
+This Skill never executes `git add`, `git commit`, `git push`, `git merge`, or `git rebase`. The user is responsible for executing the generated command and performing any later Git operation.
 
 ## Standard response flow
 
@@ -98,4 +108,4 @@ For a Git task, follow this order:
 4. Do not stage files or change Git state.
 5. Before generating output, ask the five required questions.
 6. After explicit confirmation, re-check branch, changed diff, tests, and sensitive information.
-7. Output only the final Commit Message if all checks pass.
+7. Output only the final Commit Message and complete copyable `git add -- ... && git commit -m ...` command if all checks pass.
