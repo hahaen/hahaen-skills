@@ -10,6 +10,7 @@
 - Skill 目录名使用小写 kebab-case，例如 `git-development-standard`。
 - `SKILL.md` 的 front matter 中的 `name` 必须与目录名一致。
 - 如果 Skill 使用 Codex 的展示配置，应同步维护该 Skill 下的 `agents/openai.yaml`，其中的展示名称和提示词也必须使用最新名称。
+- 每个 Skill 都必须明确要求 AI 最终使用中文回答用户；新增或修改 Skill 时，必须在 `SKILL.md` 和适用的 `agents/openai.yaml` 提示词中同步保留这一要求。
 - Skill 改名时，目录名、`SKILL.md` 的 `name`、`agents/openai.yaml` 中的相关名称、README 中的名称和安装示例必须一起更新，不能只改其中一处。
 
 ## README 维护规则
@@ -28,6 +29,7 @@
 2. 实施新增、删除或改名时，搜索旧名称的全部引用，并同步更新受影响的文档和配置。
 3. 检查 README 是否完整列出当前 Skill，且安装区域仍然只有一个示例。
 4. 检查 `SKILL.md` front matter、目录名和 `agents/openai.yaml` 的名称是否一致。
-5. 保留用户已有的无关修改，不擅自覆盖、丢弃或提交它们。
+5. 检查每个 Skill 是否明确要求 AI 最终使用中文回答用户，并在新增或修改时同步更新相关说明和提示词。
+6. 保留用户已有的无关修改，不擅自覆盖、丢弃或提交它们。
 
 除非用户明确要求，不要为了更新文档而执行 Git 提交、推送、合并、变基或其他会改变 Git 状态的操作。

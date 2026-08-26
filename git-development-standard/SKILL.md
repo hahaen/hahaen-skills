@@ -7,6 +7,10 @@ description: Enforce the project's Git workflow for branch naming, file staging,
 
 Apply this workflow to Git-related tasks in every repository. This Skill only inspects changes and directly generates the final Commit Message. It does not execute Git state-changing commands.
 
+## Response language
+
+Always answer the user in Chinese. The final response must be in Chinese; when outputting a Commit Message, keep the required `<type>(<scope>): <中文描述>` format.
+
 ## Operation safety
 
 Classify the requested operation before acting:

@@ -9,6 +9,10 @@ metadata:
 
 Use this Skill only when the user explicitly asks to update or sync a Codex Skill installed on the local machine.
 
+## Response language
+
+Always answer the user in Chinese. All progress, results, errors, and final responses from this Skill must be in Chinese.
+
 ## Workflow
 
 1. Identify the source Skill. If the user provides a GitHub Skill URL, use that URL as the source and update only that Skill. Otherwise inspect the current repository for Skill directories containing `SKILL.md`. If several local Skills are changed and the target is ambiguous, list the candidates and ask which one to update.
