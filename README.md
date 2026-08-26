@@ -15,7 +15,7 @@
 
 ```text
 $skill-installer
-install https://github.com/hahaen/hahaen-skills/tree/main/skill-updater
+安装 https://github.com/hahaen/hahaen-skills/tree/main/skill-updater
 ```
 
 指定目录中包含 `SKILL.md`，安装后即可使用对应 Skill。安装 `skill-updater` 后，显式调用 `$skill-updater` 即可更新当前仓库中的 Skill。Skill 改名时，请同步更新本示例中的名称和路径。
