@@ -11,7 +11,11 @@
 在 Codex 中使用以下命令安装指定 Skill：
 
 ```text
-$skill-installer install https://github.com/hahaen/hahaen-skills/tree/main/git-development-standard
+$skill-installer 
+```
+
+```text
+install https://github.com/hahaen/hahaen-skills/tree/main/git-development-standard
 ```
 
 指定的目录中包含 `SKILL.md`，安装后即可使用 `git-development-standard` Skill。

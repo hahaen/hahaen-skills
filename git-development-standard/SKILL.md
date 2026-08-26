@@ -1,5 +1,5 @@
 ---
-name: git-development-standard-standard-to-message
+name: git-development-standard
 description: Enforce the project's Git workflow for branch naming, file staging, commits, pushes, merges, rebases, and pull requests. Use when the user asks to inspect Git changes, prepare or stage files, create or manage branches, generate commit or PR text, commit, push, merge, rebase, or open a pull request.
 ---
 

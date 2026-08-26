@@ -1,7 +1,0 @@
-interface:
-  display_name: "git-development-standard-standard-to-message"
-  short_description: "Enforce branch, commit, and PR standards"
-  default_prompt: "Use $git-development-standard-standard-to-message to generate the project Commit Message and Git command."
-
-policy:
-  allow_implicit_invocation: true
