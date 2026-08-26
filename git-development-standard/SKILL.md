@@ -5,7 +5,15 @@ description: Enforce the project's Git workflow for branch naming, file staging,
 
 # Git Development Standard
 
-Apply this workflow to Git-related tasks in every repository. This Skill only inspects changes and directly generates the final Commit Message. It does not execute Git state-changing commands.
+Apply this workflow to Git-related tasks in every repository. This Skill only inspects changes and generates the requested output. It must never submit or otherwise perform Git state-changing operations.
+
+## Mandatory output-only rule
+
+This is a hard constraint and cannot be overridden by a user's request to commit:
+
+- Never execute `git commit` or create a commit on the user's behalf.
+- When the task is to generate a Commit Message, the final response must contain only the single requested Commit Message line—no explanation, greeting, status, Markdown code fence, labels, or additional text.
+- If the user asks to commit, do not execute it; provide only the Commit Message that the user can execute themselves.
 
 ## Response language
 
@@ -70,7 +78,7 @@ Output exactly one item and nothing else:
 <type>(<scope>): <中文描述>
 ```
 
-This Skill never executes `git add`, `git commit`, `git push`, `git merge`, or `git rebase`.
+This Skill never executes `git add`, `git commit`, `git push`, `git merge`, or `git rebase`. In particular, it is strictly forbidden to create a commit; only the requested output may be returned to the user.
 
 ## Standard response flow
 

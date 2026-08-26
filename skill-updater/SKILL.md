@@ -18,10 +18,11 @@ Always answer the user in Chinese. All progress, results, errors, and final resp
 1. Identify the source Skill. If the user provides a GitHub Skill URL, use that URL as the source and update only that Skill. Otherwise inspect the current repository for Skill directories containing `SKILL.md`. If several local Skills are changed and the target is ambiguous, list the candidates and ask which one to update.
 2. Identify the local Codex Skills directory: use `%CODEX_HOME%\skills` when `CODEX_HOME` is set; otherwise use the current user's `.codex\skills` directory. Do not assume the repository directory is the installed directory.
 3. Check that the source Skill has a valid `SKILL.md` and that its front matter `name` matches the Skill directory name. Do not update a different Skill because of a similar name.
-4. Before changing the installed Skill, move its existing directory to a sibling backup directory with a timestamp. Do not permanently delete the backup.
+4. Before changing the installed Skill, move its existing directory to a sibling backup directory with a timestamp. Keep the exact backup path for possible restoration during this update.
 5. Copy the complete source Skill directory into the original installed path. Replacing the complete directory prevents files removed from the source from remaining in the installed copy.
 6. Verify that the installed copy contains `SKILL.md` and that its front matter still matches the directory name. If validation or copying fails, restore the backup and report the failure.
-7. Report the updated Skill, source path, installed path, and backup path. Tell the user to start a new Codex turn/task for the updated Skill to take effect.
+7. After copying and validation succeed, recursively delete the exact backup directory created in step 4, including all files inside it. Do not delete any other directory, and do not clean up the backup before validation succeeds.
+8. Report the updated Skill, source path, and installed path. Confirm that the temporary backup directory and its contents were removed. Tell the user to start a new Codex turn/task for the updated Skill to take effect.
 
 ## Boundaries
 

@@ -1,7 +1,7 @@
 interface:
   display_name: "git-development-standard"
   short_description: "Enforce branch, commit, and PR standards"
-  default_prompt: "Use $git-development-standard to generate the project's Commit Message. Always answer the user in Chinese."
+  default_prompt: "Use $git-development-standard to generate the project's Commit Message. Never commit or change Git state. Always answer in Chinese and output only the single Commit Message line, with no explanation or Markdown."
 
 policy:
   allow_implicit_invocation: true
