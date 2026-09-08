@@ -1,0 +1,7 @@
+interface:
+  display_name: "database-schema-documentation"
+  short_description: "按审计字段规范设计 MySQL 表结构文档"
+  default_prompt: "使用 $database-schema-documentation 按规范设计或修改 MySQL 表结构文档，并始终使用中文回答。"
+
+policy:
+  allow_implicit_invocation: true
